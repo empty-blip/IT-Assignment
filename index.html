@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moving Arrow</title>
+    <title>Spinning Arrow</title>
     <style>
         body, html {
             height: 100%;
@@ -16,12 +16,20 @@
         }
 
         .arrow {
-            position: absolute;
             max-width: 80%; /* Adjust as needed */
             max-height: 80%; /* Adjust as needed */
             width: auto; /* Maintain aspect ratio */
             height: auto; /* Maintain aspect ratio */
-            transition: transform 0.5s; /* Smooth transition */
+            animation: spin 2s linear infinite; /* Spin animation */
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
@@ -29,21 +37,15 @@
     <img src="your-arrow-image.png" alt="Arrow" class="arrow" id="arrow">
 
     <script>
+        // Optional: Change the duration of the spin animation
         const arrow = document.getElementById('arrow');
+        let duration = 2; // seconds
 
-        function moveArrow() {
-            const windowWidth = window.innerWidth;
-            const windowHeight = window.innerHeight;
-            const arrowWidth = arrow.offsetWidth;
-            const arrowHeight = arrow.offsetHeight;
-
-            const randomX = Math.random() * (windowWidth - arrowWidth);
-            const randomY = Math.random() * (windowHeight - arrowHeight);
-
-            arrow.style.transform = `translate(${randomX}px, ${randomY}px)`;
-        }
-
-        setInterval(moveArrow, 1000); // Move every second
+        // Change the duration randomly every few seconds
+        setInterval(() => {
+            duration = Math.random() * 4 + 1; // Random duration between 1 and 5 seconds
+            arrow.style.animationDuration = `${duration}s`;
+        }, 4000); // Change every 4 seconds
     </script>
 </body>
 </html>
