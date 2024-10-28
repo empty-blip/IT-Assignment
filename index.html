@@ -1,17 +1,28 @@
-<html>
-  
-  <head></head>
-  
-  <body>
-    
-    <p>
-      Testing
-    </p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centered Arrow</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0; /* Optional: background color */
+        }
 
-    <center>
-      <img src="arrow.png" height=50 width=60>
-    </center>
-    
-  </body>
-  
+        .arrow {
+            max-width: 80%; /* Adjust as needed */
+            max-height: 80%; /* Adjust as needed */
+            width: auto; /* Maintain aspect ratio */
+            height: auto; /* Maintain aspect ratio */
+        }
+    </style>
+</head>
+<body>
+    <img src="arrow.png" alt="Arrow" class="arrow">
+</body>
 </html>
