@@ -20,7 +20,7 @@
             max-height: 80%; /* Adjust as needed */
             width: auto; /* Maintain aspect ratio */
             height: auto; /* Maintain aspect ratio */
-            transition: transform 0.2s; /* Smooth transition for faster updates */
+            transition: transform 0.5s ease-in-out; /* Smooth transition with easing */
         }
     </style>
 </head>
@@ -30,18 +30,27 @@
     <script>
         const arrow = document.getElementById('arrow');
         let currentDirection = 0; // Starting direction in degrees
+        let targetDirection = 0; // Target direction in degrees
 
         function updateCompass() {
             // Simulate a larger compass fluctuation
             const fluctuation = (Math.random() - 0.5) * 30; // Random fluctuation between -15 and 15 degrees
-            currentDirection = (currentDirection + fluctuation + 360) % 360; // Update direction
+            targetDirection = (currentDirection + fluctuation + 360) % 360; // Calculate new target direction
+
+            // Calculate the shortest rotation path
+            let delta = targetDirection - currentDirection;
+            if (delta > 180) delta -= 360;
+            if (delta < -180) delta += 360;
+
+            // Update current direction gradually towards the target
+            currentDirection += delta * 0.1; // Adjust the multiplier for speed of response
 
             // Apply the new rotation
             arrow.style.transform = `rotate(${currentDirection}deg)`;
         }
 
-        // Update the compass every 250ms for quicker movement
-        setInterval(updateCompass, 250);
+        // Update the compass every 100ms for quicker movement
+        setInterval(updateCompass, 100);
     </script>
 </body>
 </html>
