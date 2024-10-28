@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Centered Arrow</title>
+    <title>Moving Arrow</title>
     <style>
         body, html {
             height: 100%;
@@ -11,18 +11,39 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden; /* Prevent scrollbars */
             background-color: #f0f0f0; /* Optional: background color */
         }
 
         .arrow {
+            position: absolute;
             max-width: 80%; /* Adjust as needed */
             max-height: 80%; /* Adjust as needed */
             width: auto; /* Maintain aspect ratio */
             height: auto; /* Maintain aspect ratio */
+            transition: transform 0.5s; /* Smooth transition */
         }
     </style>
 </head>
 <body>
-    <img src="arrow.png" alt="Arrow" class="arrow">
+    <img src="your-arrow-image.png" alt="Arrow" class="arrow" id="arrow">
+
+    <script>
+        const arrow = document.getElementById('arrow');
+
+        function moveArrow() {
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+            const arrowWidth = arrow.offsetWidth;
+            const arrowHeight = arrow.offsetHeight;
+
+            const randomX = Math.random() * (windowWidth - arrowWidth);
+            const randomY = Math.random() * (windowHeight - arrowHeight);
+
+            arrow.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        }
+
+        setInterval(moveArrow, 1000); // Move every second
+    </script>
 </body>
 </html>
