@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spinning Arrow</title>
+    <title>Compass Needle Simulation</title>
     <style>
         body, html {
             height: 100%;
@@ -20,16 +20,7 @@
             max-height: 80%; /* Adjust as needed */
             width: auto; /* Maintain aspect ratio */
             height: auto; /* Maintain aspect ratio */
-            animation: spin 2s linear infinite; /* Spin animation */
-        }
-
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
+            transition: transform 0.5s; /* Smooth transition */
         }
     </style>
 </head>
@@ -38,18 +29,19 @@
 
     <script>
         const arrow = document.getElementById('arrow');
+        let currentDirection = 0; // Starting direction in degrees
 
-        function changeDirection() {
-            const randomAngle = Math.random() * 360; // Random angle between 0 and 360
-            const randomSpinDirection = Math.random() < 0.5 ? 1 : -1; // Randomly choose direction (1 for clockwise, -1 for counterclockwise)
+        function updateCompass() {
+            // Simulate compass fluctuation
+            const fluctuation = (Math.random() - 0.5) * 10; // Random fluctuation between -5 and 5 degrees
+            currentDirection = (currentDirection + fluctuation + 360) % 360; // Update direction
 
             // Apply the new rotation
-            arrow.style.transform = `rotate(${randomAngle}deg)`;
-            arrow.style.animation = `spin ${2 * randomSpinDirection}s linear infinite`;
+            arrow.style.transform = `rotate(${currentDirection}deg)`;
         }
 
-        // Change direction every 4 seconds
-        setInterval(changeDirection, 4000);
+        // Update the compass every 500ms
+        setInterval(updateCompass, 500);
     </script>
 </body>
 </html>
