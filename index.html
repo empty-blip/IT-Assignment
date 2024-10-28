@@ -34,18 +34,22 @@
     </style>
 </head>
 <body>
-    <img src="arrow.png" alt="Arrow" class="arrow" id="arrow">
+    <img src="your-arrow-image.png" alt="Arrow" class="arrow" id="arrow">
 
     <script>
-        // Optional: Change the duration of the spin animation
         const arrow = document.getElementById('arrow');
-        let duration = 2; // seconds
 
-        // Change the duration randomly every few seconds
-        setInterval(() => {
-            duration = Math.random() * 4 + 1; // Random duration between 1 and 5 seconds
-            arrow.style.animationDuration = `${duration}s`;
-        }, 4000); // Change every 4 seconds
+        function changeDirection() {
+            const randomAngle = Math.random() * 360; // Random angle between 0 and 360
+            const randomSpinDirection = Math.random() < 0.5 ? 1 : -1; // Randomly choose direction (1 for clockwise, -1 for counterclockwise)
+
+            // Apply the new rotation
+            arrow.style.transform = `rotate(${randomAngle}deg)`;
+            arrow.style.animation = `spin ${2 * randomSpinDirection}s linear infinite`;
+        }
+
+        // Change direction every 4 seconds
+        setInterval(changeDirection, 4000);
     </script>
 </body>
 </html>
